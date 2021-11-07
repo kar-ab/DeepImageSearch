@@ -136,3 +136,7 @@ class SearchImage:
         query_vector = self.get_query_vector(self.image_path)
         img_dict = self.search_by_vector(query_vector,self.number_of_images)
         return img_dict
+    def get_distance(self, image_path_1:str, image_path_2:str):
+        u1 = AnnoyIndex(self.f, 'euclidean')
+        u1.load(config.image_features_vectors_ann) # super fast, will just mmap the file
+        print(u1.get_distance(image_path_1, image_path_2))
